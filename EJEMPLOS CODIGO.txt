@@ -47,6 +47,13 @@ public class Prueba {
 	}
 }
 
+**** Usando ambas: SCANNER y BUFFERED READER ***
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Scanner in = new Scanner(br.readLine());
+		while (in.hasNextInt()) // ejemplo
+			....
+		in.close();
 
 *** FECHAS ***
 
@@ -218,11 +225,27 @@ https://www.delftstack.com/es/howto/java/how-to-convert-an-arraylist-to-a-string
 
 *** SCANNER leer entrada estandar teclado con saltos de línea
 
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		do {
+			System.out.print("> ");
+		} while (ejecutar(in.readLine())); //invoca un método
+	}
+
 https://www.redeszone.net/2012/02/20/curso-de-java-entrada-y-salida-con-ficheros-clase-scanner/
 
 https://darkbyteblog.wordpress.com/2011/03/08/java-flujos-de-datos-entrada-y-salida-estandar/
 
 *** EXCEPCIONES ***
+		try {
+			
+		} catch(Exception e) {
+			System.err.println(e);
+		} finally {
+			System.out.println("Fin");
+		}
+
 https://misapuntesdeprogramacion.wordpress.com/2013/02/07/excepciones/
 
 ** Checked o unchecked ++ 
@@ -461,3 +484,151 @@ public class PruebaSplitVsScanner {
     }
 
 }
+
+Otro ejemplo con SCANNER en lugar de SPLIT
+		public void addPalabras(String texto) {
+			Scanner s = new Scanner(texto);
+			s.useDelimiter("\\P{L}+");
+			while (s.hasNext())
+				add(s.next());
+			s.close();
+		}
+	
+
+*** HORA ACTUAL *** https://es.stackoverflow.com/questions/208922/como-mostrar-hora-actual-en-java/208927
+
+LEER LA HORA POR TECLADO
+	static LocalTime leerHora(Scanner in) {
+		return LocalTime.parse(in.nextLine());
+	}
+
+usando la clase Date :
+
+ DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+ Date date = new Date();
+  System.out.println("Hora actual: " + dateFormat.format(date));
+  
+usando la clase LocalDate:
+
+LocalDateTime locaDate = LocalDateTime.now();
+int hours  = locaDate.getHour();
+int minutes = locaDate.getMinute();
+int seconds = locaDate.getSecond();
+System.out.println("Hora actual : " + hours  + ":"+ minutes +":"+seconds); 
+para ambas opciones, se obtiene el formato HH:mm:ss , ejemplo de salida:
+
+Hora actual: 10:28:29
+
+
+
+
+Obtener hora actual a partir de System.currentTimeMillis() :
+
+1) Opción usando la clase TimeUnit :
+
+     long millis = System.currentTimeMillis();
+     System.out.println("Hora actual: " + String.format("%d min, %d sec",
+             TimeUnit.MILLISECONDS.toMinutes(millis),
+             TimeUnit.MILLISECONDS.toSeconds(millis) -
+                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
+     ));
+2) Esta opción es similar a la que tratas de realizar:
+
+ long millis = System.currentTimeMillis();
+ int hours   = (int) ((millis / (1000*60*60)) % 24);
+ int minutes = (int) ((millis / (1000*60)) % 60);
+ int seconds = (int) (millis / 1000) % 60 ;
+
+ System.out.println("Hora actual : " + hours + ":"+ minutes+":"+seconds);
+ 
+ 
+ *** ARRAYS STREAM ***
+     String [] nombres= new String[] { "pedro", "angel", "oscar","ana","maria"};
+    
+    Arrays.stream(nombres).forEach(System.out::println);
+	
+	Arrays.stream(nombres).filter(n->n.length()<4).forEach(System.out::println); // filtra menores de 4 caracteres
+	
+	
+*** Separador ruta compatible win y linux ***
+
+String substFileSeparator(String ruta)
+{
+String separador = "\\";
+try
+{
+// Si estamos en Windows
+if ( File.separator.equals(separador) )
+separador = "/" ;
+// Reemplaza todas las cadenas que coinciden con la expresion
+// regular dada oldSep por la cadena File.separator
+return ruta.replaceAll(separador, File.separator);
+}
+catch(Exception e)
+{
+// Por si ocurre una java.util.regex.PatternSyntaxException
+return ruta.replaceAll(separador + separador, File.separator);
+}
+}
+
+
+*** LEER LINEA DE FICHERO ***
+
+File arch = new File ("C:\\fich.txt");
+FileReader fr = new FileReader (arch);
+BufferedReader br = new BufferedReader(fr);
+...
+String linea = br.readLine();
+
+
+** LEER FICHEROS **
+https://www.discoduroderoer.es/clases-fileinputstream-y-fileoutputstream-para-ficheros-binarios-en-java/
+
+https://instintobinario.com/manejar-ficheros-java/
+
+http://dit.upm.es/~pepe/libros/vademecum/index.html?n=331.html
+
+*** CREAR DIRECTORIOS ***
+
+try
+{
+// Declaración de variables
+String directorio = "C:\\micarpeta";
+String varios = "carpeta1/carpeta2/carpeta3";
+// Crear un directorio
+boolean exito = (new File(directorio)).mkdir();
+if (exito)
+System.out.println("Directorio: " + directorio + "
+creado");
+// Crear varios directorios
+exito = (new File(varios)).mkdirs();
+if (exito)
+System.out.println("Directorios: " + varios + "
+creados");
+}
+catch (Exception e)
+{
+System.err.println("Error: " + e.getMessage());
+}
+
+** BORRAR ELEMENTOS MAP MIENTRAS ITERAMOS ***
+http://eljaviador.com/java-tip-2-eliminar-elementos-mientras-iteramos.html
+
+
+*** Crear lista con Array ***
+
+Queue<Integer> q = new LinkedList<Integer>(Arrays.asList(2, 13, -42, 21, 4, 9, 14, -3, 11, 5));
+
+*** Leer y escribir ficheros texto o binarios **** 
+
+TEXTO PLANO: Reader y Writer
+BINARIOS: InputStream y OutputStream.
+
+ BufferedInputStream: permite leer datos a través de un flujo con un buffer intermedio.
+ BufferedOutputStream: implementa los métodos para escribir en un flujo a través de un buffer.
+ FileInputStream: permite leer bytes de un fichero.
+ FileOutputStream: permite escribir bytes en un fichero o descriptor.
+ StreamTokenizer: esta clase recibe un flujo de entrada, lo analiza (parse) y divide en diversos pedazos (tokens), permitiendo leer uno en cada momento.
+ StringReader: es un flujo de caracteres cuya fuente es una cadena de caracteres o string.
+ StringWriter: es un flujo de caracteres cuya salida es un buffer de cadena de caracteres, que
+puede utilizarse para construir un string.
