@@ -9,21 +9,21 @@ import java.util.Scanner;
 public class Ejercicio5 {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
+
 		System.out.println(">");
 		Queue<Integer> cola = new LinkedList<Integer>();
+		
 		// Primera línea
-		Scanner in = new Scanner(System.in);
-		Scanner s = new Scanner(in.nextLine());
+		Scanner s = new Scanner(System.in);
 		int n = s.nextInt();
 		int k = s.nextInt();
 		int x = s.nextInt();
 		System.out.println(">");
-		Scanner in2 = new Scanner(System.in);
 		for (int i=0; i<n; i++){
-			cola.add(in2.nextInt());
+			cola.add(s.nextInt());
 		}
 		System.out.println(cola);
+		
 		// Segunda línea
 		for (int i=0; i<k; i++){
 			cola.poll();
@@ -44,7 +44,6 @@ public class Ejercicio5 {
 			}
 		}
 		System.out.println("FIN");
-		in.close();
-		in2.close();	
+		s.close();
 	}
 }

@@ -48,10 +48,10 @@ public class Ejercicio4 {
 					System.err.println("Comando no válido");
 				}
 			
-			System.out.println("Resultado: " + lista);
+			
 			
 		} while (!(teclado.equals("fin")));
-		
+		System.out.println("Resultado: " + lista);
 		in.close();
 
 	}

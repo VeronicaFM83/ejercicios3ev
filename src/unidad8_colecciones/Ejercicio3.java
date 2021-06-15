@@ -16,15 +16,27 @@ public class Ejercicio3 {
 		in.close();
 		String [] palabras = texto.split("\\P{L}+");
 		Set<String> noRepetidos = new LinkedHashSet<>();
+		Set<String> unicos = new LinkedHashSet<>();
+		List<String> todos = new ArrayList<>();
 		List<String> repetidos = new ArrayList<>();
 
 		for (String a: palabras){
-			//System.out.println(a);
-			noRepetidos.add(a);
-			repetidos.add(a);
+			if (todos.contains(a)) {
+				repetidos.add(a);
+				noRepetidos.remove(a);
+			} else {
+				noRepetidos.add(a);
+			}
+			todos.add(a);
+			unicos.add(a);
+//			if (!noRepetidos.add(a))
+//				repetidos.add(a);
 		}
+//		noRepetidos.removeAll(repetidos);
 		System.out.println("No repe: " + noRepetidos);
 		System.out.println("Repe: " + repetidos);
+		System.out.println("Todos: " + todos);
+		System.out.println("Unicos: " + unicos);
 	}
 
 }

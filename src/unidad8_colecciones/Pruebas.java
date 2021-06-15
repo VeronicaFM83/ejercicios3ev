@@ -1,5 +1,6 @@
 package unidad8_colecciones;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ public class Pruebas {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		
 		/*
 		Random r = new Random();
@@ -67,6 +69,7 @@ public class Pruebas {
 		System.out.println(c.get(1));
 		*/
 		
+		/*
 		Map<Integer, String> m = new TreeMap<Integer, String>(); m.put(11111111, "Elena Fernández"); m.put(11222333, "Carlos González"); m.put(11444555, "Rodrigo Rodíguez");
 		m.put(11321123, "Elena Fernández"); m.put(11777999, "Pilar Ramos");
 		
@@ -82,7 +85,7 @@ public class Pruebas {
 			System.out.printf("NIF: %d - Nombre: %s\n", e.getKey(), e.getValue());
 		
 		m.forEach((nif, nombre) -> System.out.printf("NIF: %d - Nombre: %s\n", nif, nombre));
-		
+		*/
 	}
 
 }

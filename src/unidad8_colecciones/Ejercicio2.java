@@ -32,7 +32,7 @@ public class Ejercicio2 {
 			System.out.print(num);
 		}*/
 		// Usando forEach
-		System.out.println("\nUSANDO FOREACH");
+		System.out.println("USANDO FOREACH");
 		listaNumeros.forEach(num -> System.out.print(num + " "));
 		
 		// Solo registros únicos
@@ -42,15 +42,18 @@ public class Ejercicio2 {
 		
 		System.out.println("\nHashSet");
 		Set<Integer> set1 = new HashSet<>(listaNumeros);
+		System.out.println("USANDO FOR MEJORADO");
 		for (Integer a: set1)
 			System.out.print(a + " ");
-		System.err.println();
 		
 		System.out.println("\nTreeSet");
 		Set<Integer> set2 = new TreeSet<>(listaNumeros);
-		set2.forEach(a -> System.out.print(a + " "));
-		System.err.println();
-		
+		System.out.println("USANDO ITERADOR");
+		Iterator<Integer> i = set2.iterator();
+		while (i.hasNext()) {
+			System.out.print(i.next() + " ");
+		//set2.forEach(a -> System.out.print(a + " "));
+		}
 		in.close();
 	}
 	
